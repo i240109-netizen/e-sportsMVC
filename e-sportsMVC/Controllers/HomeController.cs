@@ -23,6 +23,33 @@ namespace e_sportsMVC.Controllers
             return View();
         }
 
+        public IActionResult ChampionShips()
+        {
+            return View();
+        }
+
+        public IActionResult Matches()
+        {
+            return View();
+        }
+
+        public IActionResult Players()
+        {
+            return View();
+        }
+
+        public IActionResult Teams()
+        {
+            return View();
+        }
+
+        public IActionResult Tourments()
+        {
+            return View();
+        }
+
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
