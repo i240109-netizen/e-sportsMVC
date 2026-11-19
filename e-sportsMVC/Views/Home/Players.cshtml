@@ -1,4 +1,6 @@
-﻿@*
+﻿@model IEnumerable<e_sportsMVC.Models.PlayerModel>
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -13,33 +15,38 @@
                 <th>Name</th>
                 <th>Nickname</th>
                 <th>Age</th>
-                <th style="width: 30px;">Points</th>
+                <th>Points</th>
                 <th style="width: 50px;">Delete</th>
                 <th style="width: 30px;">Edit</th>
             </tr>
         </thead>
         <tbody>
-
-            <tr>
-                <td>ID</td>
-                <td>Team</td>
-                <td>Name</td>
-                <td>Nickname</td>
-                <td>Age</td>
-                <td style="width: 30px;">
-                    <details>
-                        <summary>Points(4)</summary>
-                        <ul>
-                            <li>100points</li>
-                            <li>100points</li>
-                            <li>70points</li>
-                            <li>16points</li>
-                        </ul>
-                    </details>
-                </td>
-                <td style="width: 50px;"><button>Delete</button></td>
-                <td style="width: 30px;"><button>Edit</button></td>
-            </tr>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (PlayerModel player in Model)
+                {
+                    <tr>
+                        <td>@player.ID</td>
+                        <td>@player.TeamID</td>
+                        <td>@player.Name</td>
+                        <td>@player.NickName</td>
+                        <td>@player.Age</td>
+                        <td>
+                            <details>
+                                <summary>Points(@player.Points.Count())</summary>
+                                <ul>
+                                    @foreach (int points in player.Points)
+                                    {
+                                        <li>@points Points</li>    
+                                    }
+                                </ul>
+                            </details>
+                        </td>
+                        <td style="width: 50px;"><button>Delete</button></td>
+                        <td style="width: 30px;"><button>Edit</button></td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
     

@@ -44,5 +44,15 @@
             get { return m_Points; }
             set { m_Points = value; }
         }
+
+        public PlayerModel(string id, string teamid, string name, string nickname, int age, List<int> points)
+        {
+            ID = id;
+            TeamID = teamid;
+            Name = name;
+            NickName = nickname;
+            Age = age;
+            Points = points;
+        }
     }
 }

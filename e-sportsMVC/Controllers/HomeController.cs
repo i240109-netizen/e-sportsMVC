@@ -35,6 +35,7 @@ namespace e_sportsMVC.Controllers
 
         public IActionResult Players()
         {
+            DataBaseModel.Players.Add(new PlayerModel("1", "teamA", "name", "nickname", 18, new List<int> { 100, 82, 33, 41, 5 }));
             return View(DataBaseModel.Players);
         }
 
