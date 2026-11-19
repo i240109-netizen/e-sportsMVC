@@ -1,4 +1,7 @@
-﻿namespace e_sportsMVC.Models
+﻿using System.Text.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace e_sportsMVC.Models
 {
     public static class DataBaseModel
     {
@@ -53,6 +56,20 @@
             m_Teams = new List<TeamModel>();
             m_Players = new List<PlayerModel>();
             m_Matchs = new List<MatchModel>();
+        }
+
+        public static void ExportPlayersJson()
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string jsonString = JsonSerializer.Serialize(Players, options);
+
+            File.WriteAllText("export.json", jsonString);
+            Console.WriteLine(Path.GetFullPath("export.json"));
+        }
+
+        public static void ExportPlayersXML()
+        {
+
         }
     }
 }
