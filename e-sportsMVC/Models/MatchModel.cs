@@ -9,13 +9,13 @@
             Finished
         }
 
-        private string m_Id;
-        private string m_TourmentId;
+        private string? m_Id;
+        private string? m_TourmentId;
         private DateTime m_Date;
-        private string m_TeamAId;
-        private string m_TeamBId;
-        private string m_ResultA;
-        private string m_ResultB;
+        private string? m_TeamAId;
+        private string? m_TeamBId;
+        private string? m_ResultA;
+        private string? m_ResultB;
         private enumState m_State;
 
         public string ID
