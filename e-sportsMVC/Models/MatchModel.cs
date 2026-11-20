@@ -9,14 +9,14 @@
             Finished
         }
 
-        private int m_ID;
-        private int m_TournamentID;
+        private string m_Id;
+        private string m_TourmentId;
         private DateTime m_Date;
-        private int m_TeamAID;
-        private int m_TeamBID;
-        private bool m_ResultA;
-        private bool m_ResultB;
-        private enumState m_State;
+        private string m_TeamAId;
+        private string m_TeamBId;
+        private string m_ResultA;
+        private string m_ResultB; 
+        public enumState State { get; set; }
 
 
         public int ID
@@ -60,24 +60,6 @@
             get { return m_ResultB; }
             set { m_ResultB = value; }
         }
-
-        public enumState State
-        {
-            get { return m_State; }
-            set { m_State = value; }
-        }
-
-        public MatchModel(int id, int tournamentId, DateTime date, int teamAId, int teamBId, bool resultA, bool resultB, enumState state)
-        {
-            ID = id;
-            TournamentID = tournamentId;
-            Date = date;
-            TeamAID = teamAId;
-            TeamBID = teamBId;
-            ResultA = resultA;
-            ResultB = resultB;
-            State = state;
-            DataBaseModel.MatchsIDs.Add(ID);
-        }
+      
     }
 }
