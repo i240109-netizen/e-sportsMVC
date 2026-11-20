@@ -18,16 +18,17 @@
         private string m_ResultB; 
         public enumState State { get; set; }
 
-        public string ID
+
+        public int ID
         {
-            get { return m_Id; }
-            set { m_Id = value; }
+            get { return m_ID; }
+            set { m_ID = value; }
         }
 
-        public string TourmentId
+        public int TournamentID
         {
-            get { return m_TourmentId; }
-            set { m_TourmentId = value; }
+            get { return m_TournamentID; }
+            set { m_TournamentID = value; }
         }
 
         public DateTime Date
@@ -36,25 +37,25 @@
             set { m_Date = value; }
         }
 
-        public string TeamAId
+        public int TeamAID
         {
-            get { return m_TeamAId; }
-            set { m_TeamAId = value; }
+            get { return m_TeamAID; }
+            set { m_TeamAID = value; }
         }
 
-        public string TeamBId
+        public int TeamBID
         {
-            get { return m_TeamBId; }
-            set { m_TeamBId = value; }
+            get { return m_TeamBID; }
+            set { m_TeamBID = value; }
         }
 
-        public string ResultA
+        public bool ResultA
         {
             get { return m_ResultA; }
             set { m_ResultA = value; }
         }
 
-        public string ResultB
+        public bool ResultB
         {
             get { return m_ResultB; }
             set { m_ResultB = value; }

@@ -2,20 +2,20 @@
 {
     public class PlayerModel
     {
-        private string m_Id;
-        private string m_TeamId;
+        private int m_Id;
+        private int m_TeamId;
         private string m_Name;
         private string m_NickName;
         private int m_Age;
         private List<int> m_Points;
         
-        public string ID
+        public int ID
         {
             get { return m_Id; }
             set { m_Id = value; }
         }
 
-        public string TeamID
+        public int TeamID
         {
             get { return m_TeamId; }
             set { m_TeamId = value; }
@@ -45,7 +45,7 @@
             set { m_Points = value; }
         }
 
-        public PlayerModel(string id, string teamid, string name, string nickname, int age, List<int> points)
+        public PlayerModel(int id, int teamid, string name, string nickname, int age, List<int> points)
         {
             ID = id;
             TeamID = teamid;

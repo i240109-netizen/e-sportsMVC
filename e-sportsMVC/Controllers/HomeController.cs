@@ -25,7 +25,7 @@ namespace e_sportsMVC.Controllers
 
         public IActionResult ChampionShips()
         {
-            return View();
+            return View(DataBaseModel.ChampionShips);
         }
 
         public IActionResult Matches()
@@ -35,18 +35,17 @@ namespace e_sportsMVC.Controllers
 
         public IActionResult Players()
         {
-            DataBaseModel.Players.Add(new PlayerModel("1", "teamA", "name", "nickname", 18, new List<int> { 100, 82, 33, 41, 5 }));
-            return View(DataBaseModel.Players);
+            return View(DataBaseModel.ChampionShips);
         }
 
         public IActionResult Teams()
         {
-            return View();
+            return View(DataBaseModel.ChampionShips);
         }
 
         public IActionResult Tourments()
         {
-            return View();
+            return View(DataBaseModel.ChampionShips);
         }
 
         public IActionResult Login()
