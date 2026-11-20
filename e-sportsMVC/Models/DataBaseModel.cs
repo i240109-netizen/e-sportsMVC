@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Xml;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace e_sportsMVC.Models
@@ -136,9 +137,64 @@ namespace e_sportsMVC.Models
             Console.WriteLine(Path.GetFullPath("export.json"));
         }
 
+
         public static void ExportDataXML()
         {
+            string path = "export.xml";
 
+            using (XmlWriter writer = XmlWriter.Create(path,
+                new XmlWriterSettings { Indent = true }))
+            {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("eSports");
+
+                foreach (var championship in ChampionShips)
+                {
+                    writer.WriteStartElement("Championship");
+
+                    writer.WriteElementString("ID", championship.ID.ToString());
+                    writer.WriteElementString("Name", championship.Name);
+                    writer.WriteElementString("Year", championship.Year.ToString());
+
+                    foreach (var tournament in championship.Tournaments)
+                    {
+                        writer.WriteStartElement("Tournament");
+
+                        writer.WriteElementString("ID", tournament.ID.ToString());
+                        writer.WriteElementString("Name", tournament.Name);
+                        writer.WriteElementString("Game", tournament.Game);
+
+                        foreach (var teamID in tournament.Teams)
+                        {
+                            writer.WriteElementString("TeamID", teamID.ToString());
+                        }
+
+                        foreach (var match in tournament.Matchs)
+                        {
+                            writer.WriteStartElement("Match");
+
+                            writer.WriteElementString("ID", match.MatchId.ToString());
+                            writer.WriteElementString("Date", match.Date.ToString());
+                            writer.WriteElementString("TeamAID", match.TeamAId.ToString());
+                            writer.WriteElementString("TeamBID", match.TeamBId.ToString());
+                            writer.WriteElementString("ResultA", match.ResultA.ToString());
+                            writer.WriteElementString("ResultB", match.ResultB.ToString());
+                            writer.WriteElementString("State", match.State.ToString());
+
+                            writer.WriteEndElement();
+                        }
+
+                        writer.WriteEndElement(); // Tournament
+                    }
+
+                    writer.WriteEndElement(); // Championship
+                }
+
+                writer.WriteEndElement(); // eSports
+                writer.WriteEndDocument();
+            }
+
+            Console.WriteLine(Path.GetFullPath(path));
         }
     }
 }
