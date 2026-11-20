@@ -70,7 +70,26 @@ namespace e_sportsMVC.Models
             };
             ChampionShips = new List<ChampionShipModel>()
             { 
-                
+                new ChampionShipModel(1, "EASports", "2026", new List<TournamentModel>
+                {
+                    new TournamentModel(1, 1, "Tournament 1", "GTA VI", TournamentModel.enumState.InProgress, new List<TeamModel>
+                    {
+                        new TeamModel(1, 1, "Team A", "Moon", new List<PlayerModel>
+                        {
+                            new PlayerModel(1, 1, "Dude", "BestPlayerAlive2009", 17, new List<int>{50, 50}),
+                            new PlayerModel(2, 1, "SecondDude", "AlmostBestPlayerAlive2010", 16, new List<int>{50, 50})
+                        }),
+                        new TeamModel(2, 3, "Team A", "Moon", new List<PlayerModel>
+                        {
+                            new PlayerModel(3, 2, "JustName", "JustPlayer", 20, new List<int>{12, 88}),
+                            new PlayerModel(4, 2, "Who", "Who's There?", 23, new List<int>{23, 11})
+                        })
+                    }, new List<MatchModel>
+                    {
+                        new MatchModel(1, 1, DateTime.Now, 1, 2, true, false, MatchModel.enumState.Finished),
+                        new MatchModel(2, 1, DateTime.Now, 1, 2, false, false, MatchModel.enumState.InProgress)
+                    }),
+                })
             };
         }
 

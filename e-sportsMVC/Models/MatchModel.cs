@@ -9,19 +9,26 @@
             Finished
         }
 
-        private int m_MatchId;
+        private int m_ID;
+        private int m_TournamentID;
         private DateTime m_Date;
-        private int m_TeamAId;
-        private int m_TeamBId;
+        private int m_TeamAID;
+        private int m_TeamBID;
         private bool m_ResultA;
         private bool m_ResultB;
         private enumState m_State;
 
 
-        public int MatchId
+        public int ID
         {
-            get { return m_MatchId; }
-            set { m_MatchId = value; }
+            get { return m_ID; }
+            set { m_ID = value; }
+        }
+
+        public int TournamentID
+        {
+            get { return m_TournamentID; }
+            set { m_TournamentID = value; }
         }
 
         public DateTime Date
@@ -30,16 +37,16 @@
             set { m_Date = value; }
         }
 
-        public int TeamAId
+        public int TeamAID
         {
-            get { return m_TeamAId; }
-            set { m_TeamAId = value; }
+            get { return m_TeamAID; }
+            set { m_TeamAID = value; }
         }
 
-        public int TeamBId
+        public int TeamBID
         {
-            get { return m_TeamBId; }
-            set { m_TeamBId = value; }
+            get { return m_TeamBID; }
+            set { m_TeamBID = value; }
         }
 
         public bool ResultA
@@ -60,16 +67,17 @@
             set { m_State = value; }
         }
 
-        public MatchModel(int matchId, DateTime date, int teamAId, int teamBId, bool resultA, bool resultB, enumState state)
+        public MatchModel(int id, int tournamentId, DateTime date, int teamAId, int teamBId, bool resultA, bool resultB, enumState state)
         {
-            TourmentId = matchId;
+            ID = id;
+            TournamentID = tournamentId;
             Date = date;
-            TeamAId = teamAId;
-            TeamBId = teamBId;
+            TeamAID = teamAId;
+            TeamBID = teamBId;
             ResultA = resultA;
             ResultB = resultB;
             State = state;
-            DataBaseModel.MatchsIDs.Add(matchId);
+            DataBaseModel.MatchsIDs.Add(ID);
         }
     }
 }
