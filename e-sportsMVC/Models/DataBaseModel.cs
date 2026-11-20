@@ -10,7 +10,43 @@ namespace e_sportsMVC.Models
         private static List<TourmentModel> m_Tourments = new List<TourmentModel>();
         private static List<TeamModel> m_Teams = new List<TeamModel>();
         private static List<PlayerModel> m_Players = new List<PlayerModel>();
-        private static List<MatchModel> m_Matchs = new List<MatchModel>();
+        //  private static List<MatchModel> m_Matchs = new List<MatchModel>();
+        private static List<MatchModel> m_Matchs = new List<MatchModel>()
+{
+    new MatchModel
+    {
+        ID = "1",
+        TourmentId = "T001",
+        Date = DateTime.Now.AddDays(-1),
+        TeamAId = "Team Alpha",
+        TeamBId = "Team Beta",
+        ResultA = "2",
+        ResultB = "1",
+        State = MatchModel.enumState.Finished
+    },
+    new MatchModel
+    {
+        ID = "2",
+        TourmentId = "T001",
+        Date = DateTime.Now.AddHours(2),
+        TeamAId = "Team Gamma",
+        TeamBId = "Team Delta",
+        ResultA = "0",
+        ResultB = "0",
+        State = MatchModel.enumState.InProgress
+    },
+    new MatchModel
+    {
+        ID = "3",
+        TourmentId = "T002",
+        Date = DateTime.Now.AddDays(3),
+        TeamAId = "Team Omega",
+        TeamBId = "Team Zeta",
+        ResultA = "",
+        ResultB = "",
+        State = MatchModel.enumState.NotStarted
+    }
+};
 
 
         public static List<UserModel> Users

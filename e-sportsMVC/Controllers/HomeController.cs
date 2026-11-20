@@ -30,7 +30,7 @@ namespace e_sportsMVC.Controllers
 
         public IActionResult Matches()
         {
-            return View();
+            return View(DataBaseModel.Matchs);
         }
 
         public IActionResult Players()
