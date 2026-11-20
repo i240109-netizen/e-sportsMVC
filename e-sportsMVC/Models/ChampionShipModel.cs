@@ -13,13 +13,13 @@
             set { m_Id = value; }
         }
 
-        public string Name
+        public string? Name
         {
             get { return m_name; }
             set { m_name = value; }
         }
 
-        public string Year
+        public string? Year
         {
             get { return m_Year; }
             set { m_Year = value; }
