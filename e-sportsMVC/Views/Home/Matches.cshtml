@@ -1,4 +1,5 @@
-﻿@*
+﻿@model IEnumerable<e_sportsMVC.Models.MatchModel>
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -21,6 +22,25 @@
             </tr>
         </thead>
         <tbody id="players">
+            @if(Model != null && Model.Any())
+            {
+                @foreach (MatchModel match in Model)
+                {
+                    <tr>
+                        <td>@match.ID</td>
+                        <td>@match.TournamentID</td>
+                        <td>@match.Date</td>
+                        <td>@match.TeamAID</td>
+                        <td>@match.TeamBID</td>
+                        <td>@match.ResultA</td>
+                        <td>@match.ResultB</td>
+                        <td>@match.State</td>
+                        <td style="width: 50px;"><button>Delete</button></td>
+                        <td style="width: 30px;"><button>Edit</button></td>
+                    </tr>
+                }
+            })
+
         </tbody>
     </table>
 </div>
