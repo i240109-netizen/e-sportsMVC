@@ -2,16 +2,16 @@
 
 namespace e_sportsMVC.Models
 {
-    public class TourmentModel
+    public class TournamentModel
     {
-        private enum enumState
+        public enum enumState
         {
             NotStarted,
             InProgress,
             Finished
         }
 
-        private string m_Id;
+        private int m_Id;
         private string m_ChampionShipId;
         private string m_Name;
         private string m_Game;
@@ -19,7 +19,7 @@ namespace e_sportsMVC.Models
         private List<TeamModel> m_Teams;
         private List<MatchModel> m_Matchs;
 
-        public string ID
+        public int ID
         {
             get { return m_Id; }
             set { m_Id = value; }
@@ -43,6 +43,12 @@ namespace e_sportsMVC.Models
             set { m_Game = value; }
         }
 
+        public enumState State
+        {
+            get { return m_State; }
+            set { m_State = value; }
+        }
+
         public List<TeamModel> Teams
         {
             get { return m_Teams; }
@@ -53,6 +59,17 @@ namespace e_sportsMVC.Models
         {
             get { return m_Matchs; }
             set { m_Matchs = value; }
+        }
+
+        public TournamentModel(int id, string championshipId, string name, string game, enumState state, List<TeamModel> teams, List<MatchModel> matchs)
+        {
+            ID = id;
+            ChampionShipId = championshipId;
+            Name = name;
+            Game = game;
+            State = state;
+            Teams = teams;
+            Matchs = matchs;
         }
     }
 }

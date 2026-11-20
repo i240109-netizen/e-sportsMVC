@@ -2,32 +2,26 @@
 {
     public class MatchModel
     {
-        private enum enumState
+        public enum enumState
         {
             NotStarted,
             InProgress,
             Finished
         }
 
-        private string m_Id;
-        private string m_TourmentId;
+        private int m_MatchId;
         private DateTime m_Date;
-        private string m_TeamAId;
-        private string m_TeamBId;
-        private string m_ResultA;
-        private string m_ResultB;
+        private int m_TeamAId;
+        private int m_TeamBId;
+        private bool m_ResultA;
+        private bool m_ResultB;
         private enumState m_State;
 
-        public string ID
-        {
-            get { return m_Id; }
-            set { m_Id = value; }
-        }
 
-        public string TourmentId
+        public int MatchId
         {
-            get { return m_TourmentId; }
-            set { m_TourmentId = value; }
+            get { return m_MatchId; }
+            set { m_MatchId = value; }
         }
 
         public DateTime Date
@@ -36,28 +30,46 @@
             set { m_Date = value; }
         }
 
-        public string TeamAId
+        public int TeamAId
         {
             get { return m_TeamAId; }
             set { m_TeamAId = value; }
         }
 
-        public string TeamBId
+        public int TeamBId
         {
             get { return m_TeamBId; }
             set { m_TeamBId = value; }
         }
 
-        public string ResultA
+        public bool ResultA
         {
             get { return m_ResultA; }
             set { m_ResultA = value; }
         }
 
-        public string ResultB
+        public bool ResultB
         {
             get { return m_ResultB; }
             set { m_ResultB = value; }
+        }
+
+        public enumState State
+        {
+            get { return m_State; }
+            set { m_State = value; }
+        }
+
+        public MatchModel(int matchId, DateTime date, int teamAId, int teamBId, bool resultA, bool resultB, enumState state)
+        {
+            TourmentId = matchId;
+            Date = date;
+            TeamAId = teamAId;
+            TeamBId = teamBId;
+            ResultA = resultA;
+            ResultB = resultB;
+            State = state;
+            DataBaseModel.MatchsIDs.Add(matchId);
         }
     }
 }

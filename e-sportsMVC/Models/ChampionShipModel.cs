@@ -2,12 +2,12 @@
 {
     public class ChampionShipModel
     {
-        private string m_Id;
+        private int m_Id;
         private string m_name;
         private string m_Year;
-        private List<TourmentModel> m_Tourments;
+        private List<TournamentModel> m_Tournaments;
 
-        public string ID
+        public int ID
         {
             get { return m_Id; }
             set { m_Id = value; }
@@ -25,10 +25,18 @@
             set { m_Year = value; }
         }
 
-        public List<TourmentModel> Tourments
+        public List<TournamentModel> Tournaments
         {
-            get { return m_Tourments; }
-            set { m_Tourments = value; }
+            get { return m_Tournaments; }
+            set { m_Tournaments = value; }
+        }
+
+        public ChampionShipModel(int id, string name, string year, List<TournamentModel> tournaments)
+        {
+            ID = id;
+            Name = name;
+            Year = year;
+            Tournaments = tournaments;
         }
     }
 }

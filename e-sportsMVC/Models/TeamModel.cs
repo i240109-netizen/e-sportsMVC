@@ -2,13 +2,13 @@
 {
     public class TeamModel
     {
-        private string m_Id;
+        private int m_Id;
         private string m_CaptainId;
         private string m_Name;
         private string m_Country;
         private List<PlayerModel> m_Players;
 
-        public string ID
+        public int ID
         {
             get { return m_Id; }
             set { m_Id = value; }
@@ -35,6 +35,15 @@
         {
             get { return m_Players; }
             set { m_Players = value; }
+        }
+
+        public TeamModel(int id, string captainId, string name, string country, List<PlayerModel> players)
+        {
+            ID = id;
+            CaptainId = captainId;
+            Name = name;
+            Country = country;
+            Players = players;
         }
     }
 }

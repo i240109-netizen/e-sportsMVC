@@ -7,10 +7,45 @@ namespace e_sportsMVC.Models
     {
         private static List<UserModel> m_Users = new List<UserModel>();
         private static List<ChampionShipModel> m_ChampionShips = new List<ChampionShipModel>();
-        private static List<TourmentModel> m_Tourments = new List<TourmentModel>();
-        private static List<TeamModel> m_Teams = new List<TeamModel>();
-        private static List<PlayerModel> m_Players = new List<PlayerModel>();
-        private static List<MatchModel> m_Matchs = new List<MatchModel>();
+        private static List<int> m_UsersIDs = new List<int>();
+        private static List<int> m_ChampionShipsIDs = new List<int>();
+        private static List<int> m_MatchsIDs = new List<int>();
+        private static List<int> m_PlayersIDs = new List<int>();
+        private static List<int> m_TeamsIDs = new List<int>();
+        private static List<int> m_TournamentsIDs = new List<int>();
+
+
+        public static List<int> UsersIDs
+        {             
+            get { return m_UsersIDs; }
+            set { m_UsersIDs = value; }
+        }
+        public static List<int> ChampionShipsIDs
+        {             
+            get { return m_ChampionShipsIDs; }
+            set { m_ChampionShipsIDs = value; }
+        }
+        public static List<int> MatchsIDs
+        {
+            get { return m_MatchsIDs; }
+            set { m_MatchsIDs = value; }
+        }
+        public static List<int> PlayersIDs
+        {
+            get { return m_PlayersIDs; }
+            set { m_PlayersIDs = value; }
+        }
+        public static List<int> TeamsIDs
+        {
+            get { return m_TeamsIDs; }
+            set { m_TeamsIDs = value; }
+        }
+        public static List<int> TournamentsIDs
+        {
+            get { return m_TournamentsIDs; }
+            set { m_TournamentsIDs = value; }
+        }
+
 
 
         public static List<UserModel> Users
@@ -25,49 +60,30 @@ namespace e_sportsMVC.Models
             set { m_ChampionShips = value; }
         }
 
-        public static List<TourmentModel> Tourments
-        {
-            get { return m_Tourments; }
-            set { m_Tourments = value; }
-        }
-
-        public static List<PlayerModel> Players
-                    {
-            get { return m_Players; }
-            set { m_Players = value; }
-        }
-        public static List<TeamModel> Teams
-        {
-            get { return m_Teams; }
-            set { m_Teams = value; }
-        }
-
-        public static List<MatchModel> Matchs 
-        {
-            get { return m_Matchs; }
-            set { m_Matchs = value; }
-        }
-
         public static void SetStartData()
         {
-            m_Users = new List<UserModel>();
-            m_ChampionShips = new List<ChampionShipModel>();
-            m_Tourments = new List<TourmentModel>();
-            m_Teams = new List<TeamModel>();
-            m_Players = new List<PlayerModel>();
-            m_Matchs = new List<MatchModel>();
+            Users = new List<UserModel>()
+            {
+                new UserModel(1, "Admin", "Admin@gmail.com", UserModel.enumRole.Admin),
+                new UserModel(2, "Captain", "Captain@gmail.com", UserModel.enumRole.Captain),
+                new UserModel(3, "User", "User@gmail.com", UserModel.enumRole.User)
+            };
+            ChampionShips = new List<ChampionShipModel>()
+            { 
+                
+            };
         }
 
-        public static void ExportPlayersJson()
+        public static void ExportDataJson()
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(Players, options);
+            string jsonString = JsonSerializer.Serialize(ChampionShips, options);
 
             File.WriteAllText("export.json", jsonString);
             Console.WriteLine(Path.GetFullPath("export.json"));
         }
 
-        public static void ExportPlayersXML()
+        public static void ExportDataXML()
         {
 
         }
