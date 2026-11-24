@@ -14,42 +14,42 @@ namespace e_sportsMVC.Models
         private static List<int> m_TeamsIDs = new List<int>();
         private static List<int> m_TournamentsIDs = new List<int>();
        
-    private static List<MatchModel> testMatchs = new List<MatchModel>()
-    {
-    new MatchModel
-    {
-        ID = "1",
-        TournamentID = "T000",
-        Date = DateTime.Now.AddDays(-1),
-        TeamAID = "Team Alpha",
-        TeamBID = "Team Beta",
-        ResultA = 2,
-        ResultB = 1,
-        State = MatchModel.enumState.Finished
-    },
-    new MatchModel
-    {
-        ID = "2",
-        TournamentID = "T001",
-        Date = DateTime.Now.AddHours(2),
-        TeamAID = "Team Gamma",
-        TeamBID = "Team Delta",
-        ResultA = 0,
-        ResultB = 0,
-        State = MatchModel.enumState.InProgress
-    },
-    new MatchModel
-    {
-        ID = "3",
-        TournamentID = "T002",
-        Date = DateTime.Now.AddDays(3),
-        TeamAID = "Team Omega",
-        TeamBID = "Team Zeta",
-        ResultA = 8,
-        ResultB = 5,
-        State = MatchModel.enumState.NotStarted
-    }
-};
+        private static List<MatchModel> testMatchs = new List<MatchModel>()
+        {
+            new MatchModel
+            {
+                ID = "1",
+                TournamentID = "T000",
+                Date = DateTime.Now.AddDays(-1),
+                TeamAID = "Team Alpha",
+                TeamBID = "Team Beta",
+                ResultA = 2,
+                ResultB = 1,
+                State = MatchModel.enumState.Finished
+            },
+            new MatchModel
+            {
+                ID = "2",
+                TournamentID = "T001",
+                Date = DateTime.Now.AddHours(2),
+                TeamAID = "Team Gamma",
+                TeamBID = "Team Delta",
+                ResultA = 0,
+                ResultB = 0,
+                State = MatchModel.enumState.InProgress
+            },
+            new MatchModel
+            {
+                ID = "3",
+                TournamentID = "T002",
+                Date = DateTime.Now.AddDays(3),
+                TeamAID = "Team Omega",
+                TeamBID = "Team Zeta",
+                ResultA = 8,
+                ResultB = 5,
+                State = MatchModel.enumState.NotStarted
+            }
+        };
 
 
         public static List<int> UsersIDs
