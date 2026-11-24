@@ -1,0 +1,74 @@
+﻿@model IEnumerable<e_sportsMVC.Models.TournamentModel>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ChampionShip</th>
+                <th>Name</th>
+                <th>Game</th>
+                <th>State</th>
+                <th style="width: 30px;">Teams</th>
+                <th style="width: 30px;">Matchs</th>
+                <th style="width: 50px;">Delete</th>
+                <th style="width: 30px;">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (TournamentModel tournament in Model)
+                {
+                    <tr>
+                        <td>@tournament.ID</td>
+                        <td>@tournament.ChampionShipId</td>
+                        <td>@tournament.Name</td>
+                        <td>@tournament.Game</td>
+                        <td>@tournament.State</td>
+                        <td>
+                            <details>
+                                <summary>Teams(@tournament.Teams.Count())</summary>
+                                <ul>
+                                    @foreach (TeamModel team in tournament.Teams)
+                                    {
+                                        <li>@team.Name</li>
+                                    }
+                                </ul>
+                            </details>
+                        </td>
+                        <td>
+                            <details>
+                                <summary>State(@tournament.Matchs.Count())</summary>
+                                <ul>
+                                    @foreach (MatchModel match in tournament.Matchs)
+                                    {
+                                        <li>@match.ID @match.State</li>
+                                    }
+                                </ul>
+                            </details>
+                        </td>
+                        <td style="width: 50px;"><button class="btn btn-danger btn-sm">Delete</button></td>
+                        <td style="width: 30px;"><button class="btn btn-primary btn-sm">Edit</button></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h3>Create Tournament</h3>
+    <input>ID</input>
+    <input>ChampionShip</input>
+    <input>Name</input>
+    <input>Game</input>
+    <input>State</input>
+    <button>Create</button>
+</div>

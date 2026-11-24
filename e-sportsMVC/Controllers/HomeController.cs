@@ -25,7 +25,10 @@ namespace e_sportsMVC.Controllers
 
         public IActionResult ChampionShips()
         {
-            return View(DataBaseModel.ChampionShips);
+            if (DataBaseModel.ChampionShips.Count > 0)
+                return View(DataBaseModel.ChampionShips);
+            else
+                return View();
         }
 
         public IActionResult Matches()
@@ -42,17 +45,37 @@ namespace e_sportsMVC.Controllers
 
         public IActionResult Teams()
         {
-            return View(DataBaseModel.ChampionShips);
+            DataBaseModel.StartData();
+            return View(DataBaseModel.ChampionShips[0].Tournaments[0].Teams);
         }
 
-        public IActionResult Tourments()
+        public IActionResult Tournaments()
         {
-            return View(DataBaseModel.ChampionShips);
+            DataBaseModel.StartData();
+            return View(DataBaseModel.ChampionShips[0].Tournaments);
         }
 
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult CreateChampionShip()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateChampionShip(ChampionShipModel championship)
+        {
+            if(ModelState.IsValid)
+            {
+                DataBaseModel.ChampionShips.Add(championship);
+                return RedirectToAction("ChampionShips");
+            }
+
+            return View(championship);
         }
 
 

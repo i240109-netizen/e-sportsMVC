@@ -109,7 +109,7 @@ namespace e_sportsMVC.Models
                         new TeamModel(1, 1, "Team A", "Moon", new List<PlayerModel>
                         {
                             new PlayerModel(1, 1, "Dude", "BestPlayerAlive2009", 17, new List<int>{50, 50}),
-                            new PlayerModel(2, 1, "SecondDude", "AlmostBestPlayerAlive2010", 16, new List<int>{50, 50})
+                            new PlayerModel(2, 1, "SecondDude", "AlmostBestPlayerAlive2010", 16, new List<int>{0, 49})
                         }),
                         new TeamModel(2, 3, "Team A", "Moon", new List<PlayerModel>
                         {

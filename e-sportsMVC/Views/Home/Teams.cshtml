@@ -1,11 +1,13 @@
-﻿@*
+﻿@model IEnumerable<e_sportsMVC.Models.TeamModel>
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 
 <div>
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -17,7 +19,41 @@
                 <td style="width: 30px;"><button>Edit</button></td>
             </tr>
         </thead>
-        <tbody id="players">
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (TeamModel team in Model)
+                {
+                    <tr>
+                        <td>@team.ID</td>
+                        <td>@team.CaptainId</td>
+                        <td>@team.Name</td>
+                        <td>@team.Country</td>
+                        <td>
+                            <details>
+                                <summary>Players(@team.Players.Count())</summary>
+                                <ul>
+                                    @foreach (PlayerModel player in team.Players)
+                                    {
+                                        <li>@player.NickName</li>
+                                    }
+                                </ul>
+                            </details>
+                        </td>
+                        <td style="width: 50px;"><button class="btn btn-danger btn-sm">Delete</button></td>
+                        <td style="width: 30px;"><button class="btn btn-primary btn-sm">Edit</button></td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
+</div>
+
+<div>
+    <h3>Create Team</h3>
+    <input>ID</input>
+    <input>Captain</input>
+    <input>Name</input>
+    <input>Country</input>
+    <button>Create</button>
 </div>
