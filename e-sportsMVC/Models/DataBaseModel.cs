@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using System.Xml;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace e_sportsMVC.Models
 {
@@ -13,7 +12,7 @@ namespace e_sportsMVC.Models
         private static List<int> m_PlayersIDs = new List<int>();
         private static List<int> m_TeamsIDs = new List<int>();
         private static List<int> m_TournamentsIDs = new List<int>();
-       
+
         private static List<MatchModel> testMatchs = new List<MatchModel>()
         {
             new MatchModel
@@ -51,34 +50,35 @@ namespace e_sportsMVC.Models
             }
         };
 
-
         public static List<int> UsersIDs
-        {             
+        {
             get { return m_UsersIDs; }
             set { m_UsersIDs = value; }
         }
+
         public static List<int> MatchsIDs
         {
             get { return m_MatchsIDs; }
             set { m_MatchsIDs = value; }
         }
+
         public static List<int> PlayersIDs
         {
             get { return m_PlayersIDs; }
             set { m_PlayersIDs = value; }
         }
+
         public static List<int> TeamsIDs
         {
             get { return m_TeamsIDs; }
             set { m_TeamsIDs = value; }
         }
+
         public static List<int> TournamentsIDs
         {
             get { return m_TournamentsIDs; }
             set { m_TournamentsIDs = value; }
         }
-
-
 
         public static List<UserModel> Users
         {
@@ -94,14 +94,20 @@ namespace e_sportsMVC.Models
 
         public static void StartData()
         {
-            Users = new List<UserModel>()
+            // Só cria os utilizadores de demonstração se a lista ainda estiver vazia.
+            // Assim, os registos feitos durante a execução não são apagados.
+            if (Users.Count == 0)
             {
-                new UserModel(1, "Admin", "Admin@gmail.com", UserModel.enumRole.Admin),
-                new UserModel(2, "Captain", "Captain@gmail.com", UserModel.enumRole.Captain),
-                new UserModel(3, "User", "User@gmail.com", UserModel.enumRole.User)
-            };
+                Users = new List<UserModel>()
+                {
+                    new UserModel(1, "Admin", "Admin@gmail.com", UserModel.enumRole.Admin),
+                    new UserModel(2, "Captain", "Captain@gmail.com", UserModel.enumRole.Captain),
+                    new UserModel(3, "User", "User@gmail.com", UserModel.enumRole.User)
+                };
+            }
+
             ChampionShips = new List<ChampionShipModel>()
-            { 
+            {
                 new ChampionShipModel(1, "EASports", "2026", new List<TournamentModel>
                 {
                     new TournamentModel(1, 1, "Tournament 1", "GTA VI", TournamentModel.enumState.InProgress, new List<TeamModel>
@@ -130,7 +136,6 @@ namespace e_sportsMVC.Models
             File.WriteAllText("export.json", jsonString);
             Console.WriteLine(Path.GetFullPath("export.json"));
         }
-
 
         public static void ExportDataXML()
         {
@@ -178,13 +183,13 @@ namespace e_sportsMVC.Models
                             writer.WriteEndElement();
                         }
 
-                        writer.WriteEndElement(); // Tournament
+                        writer.WriteEndElement();
                     }
 
-                    writer.WriteEndElement(); // Championship
+                    writer.WriteEndElement();
                 }
 
-                writer.WriteEndElement(); // eSports
+                writer.WriteEndElement();
                 writer.WriteEndDocument();
             }
 
