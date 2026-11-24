@@ -13,20 +13,9 @@ namespace e_sportsMVC.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult ChampionShips()
-        {
-            return View(DataBaseModel.ChampionShips);
-        }
+        public IActionResult Index() => View();
+        public IActionResult Privacy() => View();
+        public IActionResult ChampionShips() => View(DataBaseModel.ChampionShips);
 
         public IActionResult Matches()
         {
@@ -52,26 +41,20 @@ namespace e_sportsMVC.Controllers
             return View(DataBaseModel.ChampionShips[0].Tournaments);
         }
 
-        public IActionResult Login()
-        {
-            return View();
-        }
+        public IActionResult Login() => RedirectToAction("Login", "Account");
 
-        
         [HttpPost]
         public IActionResult CreateChampionShip(ChampionShipModel championship)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 championship.Tournaments ??= new List<TournamentModel>();
-
                 DataBaseModel.ChampionShips.Add(championship);
                 return RedirectToAction("ChampionShips");
             }
 
             return View("ChampionShips", DataBaseModel.ChampionShips);
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
