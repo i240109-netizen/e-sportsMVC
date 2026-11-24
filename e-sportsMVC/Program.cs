@@ -22,6 +22,9 @@ builder.Services.AddAuthorization(options =>
 });
 
 var app = builder.Build();
+
+// Inicializa os dados em memória uma única vez no arranque da aplicação.
+DataBaseModel.StartData();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
