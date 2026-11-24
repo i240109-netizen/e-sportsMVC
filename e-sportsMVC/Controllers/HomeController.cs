@@ -30,12 +30,14 @@ namespace e_sportsMVC.Controllers
 
         public IActionResult Matches()
         {
-            return View(DataBaseModel.Matchs);
+            DataBaseModel.StartData();
+            return View(DataBaseModel.ChampionShips[0].Tournaments[0].Matchs);
         }
 
         public IActionResult Players()
         {
-            return View(DataBaseModel.ChampionShips);
+            DataBaseModel.StartData();
+            return View(DataBaseModel.ChampionShips[0].Tournaments[0].Teams[0].Players);
         }
 
         public IActionResult Teams()

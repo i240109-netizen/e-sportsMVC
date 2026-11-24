@@ -8,43 +8,45 @@ namespace e_sportsMVC.Models
     {
         private static List<UserModel> m_Users = new List<UserModel>();
         private static List<ChampionShipModel> m_ChampionShips = new List<ChampionShipModel>();
-        private static List<TourmentModel> m_Tourments = new List<TourmentModel>();
-        private static List<TeamModel> m_Teams = new List<TeamModel>();
-        private static List<PlayerModel> m_Players = new List<PlayerModel>();
-        //  private static List<MatchModel> m_Matchs = new List<MatchModel>();
-        private static List<MatchModel> m_Matchs = new List<MatchModel>()
-{
+        private static List<int> m_UsersIDs = new List<int>();
+        private static List<int> m_MatchsIDs = new List<int>();
+        private static List<int> m_PlayersIDs = new List<int>();
+        private static List<int> m_TeamsIDs = new List<int>();
+        private static List<int> m_TournamentsIDs = new List<int>();
+       
+    private static List<MatchModel> testMatchs = new List<MatchModel>()
+    {
     new MatchModel
     {
         ID = "1",
-        TourmentId = "T001",
+        TournamentID = "T000",
         Date = DateTime.Now.AddDays(-1),
-        TeamAId = "Team Alpha",
-        TeamBId = "Team Beta",
-        ResultA = "2",
-        ResultB = "1",
+        TeamAID = "Team Alpha",
+        TeamBID = "Team Beta",
+        ResultA = 2,
+        ResultB = 1,
         State = MatchModel.enumState.Finished
     },
     new MatchModel
     {
         ID = "2",
-        TourmentId = "T001",
+        TournamentID = "T001",
         Date = DateTime.Now.AddHours(2),
-        TeamAId = "Team Gamma",
-        TeamBId = "Team Delta",
-        ResultA = "0",
-        ResultB = "0",
+        TeamAID = "Team Gamma",
+        TeamBID = "Team Delta",
+        ResultA = 0,
+        ResultB = 0,
         State = MatchModel.enumState.InProgress
     },
     new MatchModel
     {
         ID = "3",
-        TourmentId = "T002",
+        TournamentID = "T002",
         Date = DateTime.Now.AddDays(3),
-        TeamAId = "Team Omega",
-        TeamBId = "Team Zeta",
-        ResultA = "",
-        ResultB = "",
+        TeamAID = "Team Omega",
+        TeamBID = "Team Zeta",
+        ResultA = 8,
+        ResultB = 5,
         State = MatchModel.enumState.NotStarted
     }
 };
@@ -54,11 +56,6 @@ namespace e_sportsMVC.Models
         {             
             get { return m_UsersIDs; }
             set { m_UsersIDs = value; }
-        }
-        public static List<int> ChampionShipsIDs
-        {             
-            get { return m_ChampionShipsIDs; }
-            set { m_ChampionShipsIDs = value; }
         }
         public static List<int> MatchsIDs
         {
@@ -95,7 +92,7 @@ namespace e_sportsMVC.Models
             set { m_ChampionShips = value; }
         }
 
-        public static void SetStartData()
+        public static void StartData()
         {
             Users = new List<UserModel>()
             {
@@ -119,11 +116,8 @@ namespace e_sportsMVC.Models
                             new PlayerModel(3, 2, "JustName", "JustPlayer", 20, new List<int>{12, 88}),
                             new PlayerModel(4, 2, "Who", "Who's There?", 23, new List<int>{23, 11})
                         })
-                    }, new List<MatchModel>
-                    {
-                        new MatchModel(1, 1, DateTime.Now, 1, 2, true, false, MatchModel.enumState.Finished),
-                        new MatchModel(2, 1, DateTime.Now, 1, 2, false, false, MatchModel.enumState.InProgress)
-                    }),
+                    }, new List<MatchModel>(testMatchs)
+                    )
                 })
             };
         }
@@ -173,10 +167,10 @@ namespace e_sportsMVC.Models
                         {
                             writer.WriteStartElement("Match");
 
-                            writer.WriteElementString("ID", match.MatchId.ToString());
+                            writer.WriteElementString("ID", match.ID.ToString());
                             writer.WriteElementString("Date", match.Date.ToString());
-                            writer.WriteElementString("TeamAID", match.TeamAId.ToString());
-                            writer.WriteElementString("TeamBID", match.TeamBId.ToString());
+                            writer.WriteElementString("TeamAID", match.TeamAID.ToString());
+                            writer.WriteElementString("TeamBID", match.TeamBID.ToString());
                             writer.WriteElementString("ResultA", match.ResultA.ToString());
                             writer.WriteElementString("ResultB", match.ResultB.ToString());
                             writer.WriteElementString("State", match.State.ToString());
