@@ -31,9 +31,12 @@
                             <details>
                                 <summary>Tournaments(@championship.Tournaments.Count())</summary>
                                 <ul>
-                                    @foreach (TournamentModel tournament in championship.Tournaments)
+                                    @if (championship.Tournaments != null)
                                     {
-                                        <li>@tournament.Name</li>
+                                        @foreach (TournamentModel tournament in championship.Tournaments)
+                                        {
+                                            <li>@tournament.Name</li>
+                                        }
                                     }
                                 </ul>
                             </details>
@@ -46,12 +49,25 @@
         </tbody>
     </table>
 </div>
-<form asp-controleer="ChampionShipModel" asp-action="Create" method="post">
+<form asp-controller="Home" asp-action="CreateChampionShip" method="post">
 <div>
     <h3>Create ChampionShip</h3>
-    <input id="ID">ID</input>
-    <input id="Name">Name</input>
-    <input id="Year">Year</input>
-    <button type="submit">Create</button>
+    <label asp-for="ID">ID</label>
+    <input asp-for="ID" name="ID"/>
+        <span asp-validation-for="ID" class="text-danger"></span>
+
+    <label asp-for="Name">Name</label>
+    <input asp-for="Name" name="Name"/>
+        <span asp-validation-for="Name" class="text-danger">
+            </span>
+
+    <label asp-for="Year">Year</label>
+        <input asp-for="Year" name="Year" />
+        <span asp-validation-for="Year" class="text-danger"> </span>
+
+    <button type="submit" class="btn btn-success" >Create</button>
 </div>
 </form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -25,10 +25,7 @@ namespace e_sportsMVC.Controllers
 
         public IActionResult ChampionShips()
         {
-            if (DataBaseModel.ChampionShips.Count > 0)
-                return View(DataBaseModel.ChampionShips);
-            else
-                return View();
+            return View(DataBaseModel.ChampionShips);
         }
 
         public IActionResult Matches()
@@ -60,22 +57,19 @@ namespace e_sportsMVC.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult CreateChampionShip()
-        {
-            return View();
-        }
-
+        
         [HttpPost]
         public IActionResult CreateChampionShip(ChampionShipModel championship)
         {
             if(ModelState.IsValid)
             {
+                championship.Tournaments ??= new List<TournamentModel>();
+
                 DataBaseModel.ChampionShips.Add(championship);
                 return RedirectToAction("ChampionShips");
             }
 
-            return View(championship);
+            return View("ChampionShips", DataBaseModel.ChampionShips);
         }
 
 
