@@ -8,25 +8,11 @@ namespace e_sportsMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        public HomeController(ILogger<HomeController> logger) { _logger = logger; }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult ChampionShips()
-        {
-            return View(DataBaseModel.ChampionShips);
-        }
+        public IActionResult Index() => View();
+        public IActionResult Privacy() => View();
+        public IActionResult ChampionShips() => View(DataBaseModel.ChampionShips);
 
         public IActionResult Matches()
         {
@@ -40,26 +26,13 @@ namespace e_sportsMVC.Controllers
             return View(DataBaseModel.ChampionShips[0].Tournaments[0].Teams[0].Players);
         }
 
-        public IActionResult Teams()
-        {
-            return View(DataBaseModel.ChampionShips);
-        }
-
-        public IActionResult Tourments()
-        {
-            return View(DataBaseModel.ChampionShips);
-        }
-
-        public IActionResult Login()
-        {
-            return View();
-        }
-
+        public IActionResult Teams() => View(DataBaseModel.ChampionShips);
+        public IActionResult Tourments() => View(DataBaseModel.ChampionShips);
+        public IActionResult Login() => RedirectToAction("Login", "Account");
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        public IActionResult Error() => View(new ErrorViewModel {
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 }
