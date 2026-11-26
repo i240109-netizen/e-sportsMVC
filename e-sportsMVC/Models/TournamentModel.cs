@@ -17,7 +17,7 @@ namespace e_sportsMVC.Models
         private string m_Game;
         private enumState m_State;
         private List<TeamModel> m_Teams;
-        private List<MatchModel> m_Matchs;
+        private List<MatchModel> m_Matches;
 
         public int ID
         {
@@ -55,13 +55,16 @@ namespace e_sportsMVC.Models
             set { m_Teams = value; }
         }
 
-        public List<MatchModel> Matchs
+        public List<MatchModel> Matches
         {
-            get { return m_Matchs; }
-            set { m_Matchs = value; }
+            get { return m_Matches; }
+            set { m_Matches = value; }
         }
 
-        public TournamentModel(int id, int championshipId, string name, string game, enumState state, List<TeamModel> teams, List<MatchModel> matchs)
+        public TournamentModel()
+        { }
+
+        public TournamentModel(int id, int championshipId, string name, string game, enumState state, List<TeamModel> teams, List<MatchModel> matches)
         {
             ID = id;
             ChampionShipId = championshipId;
@@ -69,7 +72,7 @@ namespace e_sportsMVC.Models
             Game = game;
             State = state;
             Teams = teams;
-            Matchs = matchs;
+            Matches = matches;
         }
     }
 }

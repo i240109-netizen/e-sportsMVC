@@ -1,4 +1,4 @@
-﻿@model IEnumerable<e_sportsMVC.Models.ChampionShipModel>
+﻿@using e_sportsMVC.Models
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,9 +19,9 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model != null && Model.Any())
+            @if (DataBaseModel.ChampionShips != null && DataBaseModel.ChampionShips.Any())
             {
-                @foreach (ChampionShipModel championship in Model)
+                @foreach (ChampionShipModel championship in DataBaseModel.ChampionShips)
                 {
                     <tr>
                         <td>@championship.ID</td>
@@ -49,25 +49,5 @@
         </tbody>
     </table>
 </div>
-<form asp-controller="Home" asp-action="CreateChampionShip" method="post">
-<div>
-    <h3>Create ChampionShip</h3>
-    <label asp-for="ID">ID</label>
-    <input asp-for="ID" name="ID"/>
-        <span asp-validation-for="ID" class="text-danger"></span>
 
-    <label asp-for="Name">Name</label>
-    <input asp-for="Name" name="Name"/>
-        <span asp-validation-for="Name" class="text-danger">
-            </span>
-
-    <label asp-for="Year">Year</label>
-        <input asp-for="Year" name="Year" />
-        <span asp-validation-for="Year" class="text-danger"> </span>
-
-    <button type="submit" class="btn btn-success" >Create</button>
-</div>
-</form>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+<partial name="_ChampionShips" model="new e_sportsMVC.Models.ChampionShipModel()"></partial>

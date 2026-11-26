@@ -1,0 +1,37 @@
+﻿@model e_sportsMVC.Models.TournamentModel
+
+<form asp-controller="Home" asp-action="CreateTournament" method="post">
+    <div>
+        <h3>Create Tournament</h3>
+        <label asp-for="ID">ID</label>
+        <input asp-for="ID" name="ID" />
+        <span asp-validation-for="ID" class="text-danger"></span>
+
+        <label asp-for="ChampionShipId">ChampionShip Id</label>
+        <input asp-for="ChampionShipId" name="ChampionShipId" />
+        <span asp-validation-for="ChampionShipId" class="text-danger">
+        </span>
+
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" name="Name" />
+        <span asp-validation-for="Name" class="text-danger">
+        </span>
+
+        <label asp-for="Game">Game</label>
+        <input asp-for="Game" name="Game" />
+        <span asp-validation-for="Game" class="text-danger"> </span>
+
+        <label asp-for="State">State</label>
+        <input asp-for="State" name="State" />
+        <span asp-validation-for="State" class="text-danger"> </span>
+
+        <label asp-for="Matches">Matches</label>
+        <input asp-for="Matches" name="Matches" />
+        <span asp-validation-for="Matches" class="text-danger"> </span>
+
+        <button type="submit" class="btn btn-success">Create</button>
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

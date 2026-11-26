@@ -1,0 +1,40 @@
+﻿@model e_sportsMVC.Models.MatchModel
+
+<form asp-controller="Home" asp-action="CreateMatch" method="post">
+    <div>
+        <h3>Create Match</h3>
+        <label asp-for="ID">ID</label>
+        <input asp-for="ID" name="ID" />
+        <span asp-validation-for="ID" class="text-danger"></span>
+
+        <label asp-for="TournamentID">Tournament</label>
+        <input asp-for="TournamentID" name="TournamentID" />
+        <span asp-validation-for="TournamentID" class="text-danger">
+        </span>
+
+        <label asp-for="Date">Date</label>
+        <input asp-for="Date" name="Date" />
+        <span asp-validation-for="Date" class="text-danger"> </span>
+
+        <label asp-for="TeamAID">Team A</label>
+        <input asp-for="TeamAID" name="TeamAID" />
+        <span asp-validation-for="TeamAID" class="text-danger"> </span>
+
+        <label asp-for="TeamBID">Team B</label>
+        <input asp-for="TeamBID" name="TeamBID" />
+        <span asp-validation-for="TeamBID" class="text-danger"> </span>
+
+        <label asp-for="ResultA">Result A</label>
+        <input asp-for="ResultA" name="ResultA" />
+        <span asp-validation-for="ResultA" class="text-danger"> </span>
+
+        <label asp-for="ResultB">Result B</label>
+        <input asp-for="ResultB" name="ResultB" />
+        <span asp-validation-for="ResultB" class="text-danger"> </span>
+
+        <button type="submit" class="btn btn-success">Create</button>
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
