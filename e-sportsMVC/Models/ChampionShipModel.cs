@@ -6,10 +6,10 @@ namespace e_sportsMVC.Models
     {
         private int m_Id;
         private string m_name;
-        private string? m_Year;
+        private string m_Year;
         private List<TournamentModel>? m_Tournaments;
 
-        [Required]
+        [Unique(typeof(ChampionShipModel))]
         public int ID
         {
             get { return m_Id; }
@@ -22,7 +22,7 @@ namespace e_sportsMVC.Models
             set { m_name = value; }
         }
 
-        public string? Year
+        public string Year
         {
             get { return m_Year; }
             set { m_Year = value; }
