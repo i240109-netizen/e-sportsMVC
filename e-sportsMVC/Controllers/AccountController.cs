@@ -61,9 +61,7 @@ namespace e_sportsMVC.Controllers
                 return View(model);
             }
 
-            int nextId = DataBaseModel.Users.Count == 0
-                ? 1
-                : DataBaseModel.Users.Max(u => u.ID) + 1;
+            int nextId = DataBaseModel.Users.Count == 0 ? 1 : DataBaseModel.Users.Max(u => u.ID) + 1;
 
             var user = new UserModel(
                 nextId,
@@ -96,14 +94,13 @@ namespace e_sportsMVC.Controllers
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(identity),
-                new AuthenticationProperties
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(identity),new AuthenticationProperties
                 {
                     IsPersistent = remember,
                     ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8)
-                });
+                }
+            );
         }
     }
 }
