@@ -78,7 +78,7 @@ namespace e_sportsMVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [Authorize, HttpPost, ValidateAntiForgeryToken]
+        [/*Authorize, */HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

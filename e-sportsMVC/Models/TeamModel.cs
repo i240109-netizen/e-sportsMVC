@@ -37,6 +37,9 @@
             set { m_Players = value; }
         }
 
+        public TeamModel()
+        { }
+
         public TeamModel(int id, int captainId, string name, string country, List<PlayerModel> players)
         {
             ID = id;

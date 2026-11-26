@@ -7,6 +7,20 @@
 }
 
 <div>
+    <form asp-action="SelectChampionShip" method="post">
+        <div class="form-group">
+            <label for="championShipSelect">Campeonato</label>
+            <select id="championShipSelect" name="selectedChampionShipId" class="form-select">
+                <option value="">-- Selecione um campeonato --</option>
+                @foreach (var item in DataBaseModel.ChampionShips)
+                {
+                    <option value="@item.Name">@item.Name</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Confirmar</button>
+    </form>
     <table class="table">
         <thead>
             <tr>
@@ -22,7 +36,7 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model != null && Model.Any())
+            @if(@Model.Any() && @Model != null)
             {
                 @foreach (TournamentModel tournament in Model)
                 {
@@ -34,7 +48,7 @@
                         <td>@tournament.State</td>
                         <td>
                             <details>
-                                <summary>Teams(@tournament.Teams.Count())</summary>
+                                <summary>Teams (@tournament.Teams.Count())</summary>
                                 <ul>
                                     @foreach (TeamModel team in tournament.Teams)
                                     {
@@ -45,9 +59,9 @@
                         </td>
                         <td>
                             <details>
-                                <summary>State(@tournament.Matchs.Count())</summary>
+                                <summary>Matches (@tournament.Matches.Count())</summary>
                                 <ul>
-                                    @foreach (MatchModel match in tournament.Matchs)
+                                    @foreach (MatchModel match in tournament.Matches)
                                     {
                                         <li>@match.ID @match.State</li>
                                     }
@@ -63,12 +77,5 @@
     </table>
 </div>
 
-<div>
-    <h3>Create Tournament</h3>
-    <input>ID</input>
-    <input>ChampionShip</input>
-    <input>Name</input>
-    <input>Game</input>
-    <input>State</input>
-    <button>Create</button>
-</div>
+
+<partial name="_Tournaments" model="new e_sportsMVC.Models.TournamentModel()"></partial>

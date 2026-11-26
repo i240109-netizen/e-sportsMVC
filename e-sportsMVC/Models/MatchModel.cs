@@ -61,5 +61,7 @@
             set { m_ResultB = value; }
         }
       
+        public MatchModel()
+        { }
     }
 }

@@ -45,6 +45,9 @@
             set { m_Points = value; }
         }
 
+        public PlayerModel()
+        { }
+
         public PlayerModel(int id, int teamid, string name, string nickname, int age, List<int> points)
         {
             ID = id;

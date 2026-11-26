@@ -117,7 +117,7 @@ namespace e_sportsMVC.Models
                         writer.WriteElementString("Game", tournament.Game);
                         foreach (var teamID in tournament.Teams)
                             writer.WriteElementString("TeamID", teamID.ToString());
-                        foreach (var match in tournament.Matchs)
+                        foreach (var match in tournament.Matches)
                         {
                             writer.WriteStartElement("Match");
                             writer.WriteElementString("ID", match.ID.ToString());
