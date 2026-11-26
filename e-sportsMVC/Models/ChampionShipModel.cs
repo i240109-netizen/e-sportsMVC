@@ -9,7 +9,7 @@ namespace e_sportsMVC.Models
         private string? m_Year;
         private List<TournamentModel>? m_Tournaments;
 
-        [Range(0, 100, ErrorMessage = "A tournament must have between 2 and 64 teams.")]
+        [Required]
         public int ID
         {
             get { return m_Id; }
