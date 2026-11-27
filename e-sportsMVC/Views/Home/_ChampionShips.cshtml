@@ -8,51 +8,21 @@
 
 <div>
     <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Year</th>
-                <th style="width: 30px;">Tourments</th>
-                <th style="width: 50px;">Delete</th>
-                <th style="width: 30px;">Edit</th>
-            </tr>
-        </thead>
         <tbody>
             @if (DataBaseModel.ChampionShips != null && DataBaseModel.ChampionShips.Any())
             {
                 @foreach (ChampionShipModel championship in DataBaseModel.ChampionShips)
                 {
-                    <tr>
-                        <td>@championship.ID</td>
-                        <td>@championship.Name</td>
-                        <td>@championship.Year</td>
-                        <td>
-                            <details>
-                                <summary>Tournaments(@championship.Tournaments.Count())</summary>
-                                <ul>
-                                    @if (championship.Tournaments != null)
-                                    {
-                                        @foreach (TournamentModel tournament in championship.Tournaments)
-                                        {
-                                            <li>@tournament.Name</li>
-                                        }
-                                    }
-                                </ul>
-                            </details>
-                        </td>
+                    <tr>                       
                         <td style="width: 50px;">
                             <form asp-action="DeleteChampionShip" method="post" onsubmit="return confirm('Eliminar?');">
                                 <input type="hidden" name="id" value="@championship.ID" />
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
-                        </td>
-                        <td style="width: 30px;"><a asp-action="EditChampionShip" asp-route-id="@championship.ID" class="btn btn-primary btn-sm">Edit</a></td>
+                        </td>                     
+                       
                     </tr>
                 }
             }
         </tbody>
     </table>
 </div>
-
-<partial name="_ChampionShips" model="new e_sportsMVC.Models.ChampionShipModel()"></partial>

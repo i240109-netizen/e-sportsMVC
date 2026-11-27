@@ -19,22 +19,38 @@ namespace e_sportsMVC.Controllers
 
         public IActionResult Matches()
         {
-            return View(DataBaseModel.ChampionShips[0].Tournaments[0].Matches);
+            var firstChamp = DataBaseModel.ChampionShips?.FirstOrDefault();
+            var firstTournament = firstChamp?.Tournaments?.FirstOrDefault();
+            var matches = firstTournament?.Matches ?? new List<MatchModel>();
+
+            return View(matches);
         }
 
         public IActionResult Players()
         {
-            return View(DataBaseModel.ChampionShips[0].Tournaments[0].Teams[0].Players);
+            var firstChamp = DataBaseModel.ChampionShips?.FirstOrDefault();
+            var firstTournament = firstChamp?.Tournaments?.FirstOrDefault();
+            var firstTeam = firstTournament?.Teams?.FirstOrDefault();
+            var players = firstTeam?.Players ?? new List<PlayerModel>();
+
+            return View(players);
         }
 
         public IActionResult Teams()
         {
-            return View(DataBaseModel.ChampionShips[0].Tournaments[0].Teams);
+            var firstChamp = DataBaseModel.ChampionShips?.FirstOrDefault();
+            var firstTournament = firstChamp?.Tournaments?.FirstOrDefault();
+            var teams = firstTournament?.Teams ?? new List<TeamModel>();
+
+            return View(teams);
         }
 
         public IActionResult Tournaments()
         {
-            return View(DataBaseModel.ChampionShips[0].Tournaments);
+            var firstChamp = DataBaseModel.ChampionShips?.FirstOrDefault();
+            var tournaments = firstChamp?.Tournaments ?? new List<TournamentModel>();
+
+            return View(tournaments);
         }
 
         public IActionResult TournamentsTable(int championshipId)
@@ -46,9 +62,7 @@ namespace e_sportsMVC.Controllers
             return PartialView("_TournamentsTable", tournaments);
         }
 
-
         public IActionResult Login() => RedirectToAction("Login", "Account");
-
 
         [HttpPost]
         public IActionResult CreateChampionShip(ChampionShipModel championship)
@@ -63,20 +77,25 @@ namespace e_sportsMVC.Controllers
             return View("ChampionShips", DataBaseModel.ChampionShips);
         }
 
-
         [HttpPost]
         public IActionResult CreateTournament(TournamentModel tournament)
         {
             if (ModelState.IsValid)
             {
                 tournament.Matches ??= new List<MatchModel>();
-                DataBaseModel.ChampionShips[0].Tournaments.Add(tournament);
+                var targetChamp = DataBaseModel.ChampionShips.FirstOrDefault(c => c.ID == tournament.ChampionShipId)
+                                  ?? DataBaseModel.ChampionShips.FirstOrDefault();
+
+                if (targetChamp != null)
+                {
+                    targetChamp.Tournaments ??= new List<TournamentModel>();
+                    targetChamp.Tournaments.Add(tournament);
+                }
                 return RedirectToAction("Tournaments");
             }
 
             return View("Tournaments", DataBaseModel.ChampionShips);
         }
-
 
         [HttpPost]
         public IActionResult CreateTeam(TeamModel team)
@@ -84,39 +103,51 @@ namespace e_sportsMVC.Controllers
             if (ModelState.IsValid)
             {
                 team.Players ??= new List<PlayerModel>();
-                DataBaseModel.ChampionShips[0].Tournaments[0].Teams.Add(team);
+                var targetTournament = AllTournaments().FirstOrDefault();
+                if (targetTournament != null)
+                {
+                    targetTournament.Teams ??= new List<TeamModel>();
+                    targetTournament.Teams.Add(team);
+                }
                 return RedirectToAction("Teams");
             }
 
             return View("Teams", DataBaseModel.ChampionShips);
         }
 
-
         [HttpPost]
         public IActionResult CreatePlayer(PlayerModel player)
         {
             if (ModelState.IsValid)
             {
-                DataBaseModel.ChampionShips[0].Tournaments[0].Teams[0].Players.Add(player);
+                var targetTeam = AllTeams().FirstOrDefault();
+                if (targetTeam != null)
+                {
+                    targetTeam.Players ??= new List<PlayerModel>();
+                    targetTeam.Players.Add(player);
+                }
                 return RedirectToAction("Players");
             }
 
             return View("Players", DataBaseModel.ChampionShips);
         }
 
-
         [HttpPost]
         public IActionResult CreateMatch(MatchModel match)
         {
             if (ModelState.IsValid)
             {
-                DataBaseModel.ChampionShips[0].Tournaments[0].Matches.Add(match);
+                var targetTournament = AllTournaments().FirstOrDefault();
+                if (targetTournament != null)
+                {
+                    targetTournament.Matches ??= new List<MatchModel>();
+                    targetTournament.Matches.Add(match);
+                }
                 return RedirectToAction("Matches");
             }
 
             return View("Matches", DataBaseModel.ChampionShips);
         }
-
 
         // ================= HELPERS (procuram em todos os campeonatos) =================
 
@@ -287,7 +318,6 @@ namespace e_sportsMVC.Controllers
             item.State = state;
             return RedirectToAction("Matches");
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
