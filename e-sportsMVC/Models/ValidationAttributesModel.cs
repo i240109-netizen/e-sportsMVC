@@ -23,55 +23,36 @@ namespace e_sportsMVC.Models
 
             var type = validationContext.GetType;
             var idProperty = validationContext.ObjectType.GetProperty("ID");
-            var currentId = idProperty?.GetValue(validationContext.ObjectInstance);
-            
 
-            bool exists = DataBaseModel.ChampionShips.Exists(c => c.ID.ToString() == idProperty.ToString());
-
-            return exists ? new ValidationResult("This ") : ValidationResult.Success;
-        }
-
-        protected override ValidationResult? IsValidPlayer2(object? value, ValidationContext validationContext)
-        {
-            if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
+            bool exists = false;
+            switch (_entityType)
             {
-                return new ValidationResult("Player ID is required.");
-            }
-            //var playerId = value.ToString();
+                case Type t when t == typeof(ChampionShipModel):
+                    exists = DataBaseModel.ChampionShips.Exists(c => c.ID.ToString() == value.ToString());
+                    break;
 
-            string? playerId;
-            CheckPlayerIDUniqueness(playerId = value.ToString());
-            return ValidationResult.Success;
-        }
+                case Type t when t == typeof(MatchModel):
+                    exists = DataBaseModel.MatchesIDs.Exists(c => c.ToString() == value.ToString());
+                    break;
 
+                case Type t when t == typeof(PlayerModel):
+                    exists = DataBaseModel.PlayersIDs.Exists(c => c.ToString() == value.ToString()); 
+                    break;
 
-        private void CheckPlayerIDUniqueness(string playerId)
-        {
-            var existingPlayer = DataBaseModel.Players.FirstOrDefault(p => p.ID == playerId);
-            if (existingPlayer != null)
-            {
-                throw new ValidationException($"Player ID '{playerId}' already exists.");
-            }
-        }
+                case Type t when t == typeof(TeamModel):
+                    exists = DataBaseModel.TeamsIDs.Exists(c => c.ToString() == value.ToString());
+                    break;
 
-        //os campos todos dentro da web na página match tem todos de estar prenchidos corretamente para depois o 
-        //butao funcionar e ele efetivamente adicionar os dados
-        
-        private void CheckMatchFields(string matchId, string tournament, DateTime date, 
-            string teamA, string teamB, int resultA, int resultB)
-        {          
-            try
-            {
-                matchId = string.IsNullOrWhiteSpace(matchId) && matchId.FirstOrDefault(a => a.);
+                case Type t when t == typeof(TournamentModel):
+                    exists = DataBaseModel.TournamentsIDs.Exists(c => c.ToString() == value.ToString());
+                    break;
 
-
-                //validation
+                case Type t when t == typeof(UserModel):
+                    exists = DataBaseModel.UsersIDs.Exists(c => c.ToString() == value.ToString());
+                    break;
             } 
-            catch (ValidationException ve)
-            {
-            
-                throw new ValidationException("Todos os campos tem de estar preenchidos" + ve.Message);
-            }
+
+            return exists ? new ValidationResult("This ID is already in use") : ValidationResult.Success;
         }
     }
 }

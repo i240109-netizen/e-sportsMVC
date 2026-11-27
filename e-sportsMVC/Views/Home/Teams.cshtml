@@ -5,7 +5,20 @@
 *@
 @{
 }
+<form asp-action="SelectChampionShip" method="post">
+    <div class="form-group">
+        <label for="championShipSelect">Campeonato</label>
+        <select id="championShipSelect" name="selectedChampionShipId" class="form-select">
+            <option value="">-- Selecione um campeonato --</option>
+            @foreach (var item in DataBaseModel.ChampionShips)
+            {
+                <option value="@item.ID">@item.Name</option>
+            }
+        </select>
+    </div>
 
+    <button type="submit" class="btn btn-primary mt-2">Confirmar</button>
+</form>
 <div>
     <table class="table">
         <thead>

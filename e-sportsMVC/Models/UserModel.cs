@@ -15,6 +15,8 @@
         private string m_Password;
         private enumRole m_Role;
 
+        [Required]
+        [Unique(typeof(UserModel))]
         public int ID
         {
             get { return m_Id; }

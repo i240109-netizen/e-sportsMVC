@@ -65,12 +65,11 @@ namespace e_sportsMVC.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateTournament(TournamentModel tournament)
+        public IActionResult CreateTournament(int ChampionshipId, TournamentModel tournament)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && ChampionshipId != -1)
             {
-                tournament.Matches ??= new List<MatchModel>();
-                DataBaseModel.ChampionShips[0].Tournaments.Add(tournament);
+                DataBaseModel.ChampionShips.Find(c => c.ID == ChampionshipId).Tournaments.Add(tournament);
                 return RedirectToAction("Tournaments");
             }
 

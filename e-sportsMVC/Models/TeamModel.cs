@@ -8,6 +8,8 @@
         private string m_Country;
         private List<PlayerModel> m_Players;
 
+        [Unique(typeof(TeamModel))]
+        [Required]
         public int ID
         {
             get { return m_Id; }

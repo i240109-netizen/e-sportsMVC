@@ -19,6 +19,8 @@ namespace e_sportsMVC.Models
         private List<TeamModel> m_Teams;
         private List<MatchModel> m_Matches;
 
+        [Unique(typeof(TournamentModel))]
+        [Required]
         public int ID
         {
             get { return m_Id; }

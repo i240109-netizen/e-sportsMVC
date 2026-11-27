@@ -36,7 +36,7 @@ namespace e_sportsMVC.Models
         };
 
         public static List<int> UsersIDs { get { return m_UsersIDs; } set { m_UsersIDs = value; } }
-        public static List<int> MatchsIDs { get { return m_MatchsIDs; } set { m_MatchsIDs = value; } }
+        public static List<int> MatchesIDs { get { return m_MatchsIDs; } set { m_MatchsIDs = value; } }
         public static List<int> PlayersIDs { get { return m_PlayersIDs; } set { m_PlayersIDs = value; } }
         public static List<int> TeamsIDs { get { return m_TeamsIDs; } set { m_TeamsIDs = value; } }
         public static List<int> TournamentsIDs { get { return m_TournamentsIDs; } set { m_TournamentsIDs = value; } }

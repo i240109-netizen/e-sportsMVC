@@ -11,10 +11,10 @@
         <div class="form-group">
             <label for="championShipSelect">Campeonato</label>
             <select id="championShipSelect" name="selectedChampionShipId" class="form-select">
-                <option value="">-- Selecione um campeonato --</option>
+                <option value="-1">-- Selecione um campeonato --</option>
                 @foreach (var item in DataBaseModel.ChampionShips)
                 {
-                    <option value="@item.Name">@item.Name</option>
+                    <option value="@item.ID">@item.Name</option>
                 }
             </select>
         </div>

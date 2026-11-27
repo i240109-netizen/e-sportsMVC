@@ -11,6 +11,7 @@ namespace e_sportsMVC.Models
         private int m_Age;
         private List<int> m_Points;
 
+        [Unique(typeof(PlayerModel))]
         [Required]
         public int ID
         {

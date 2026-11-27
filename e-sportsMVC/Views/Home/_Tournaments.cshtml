@@ -2,6 +2,8 @@
 
 <form asp-controller="Home" asp-action="CreateTournament" method="post">
     <div>
+        <input type="hidden" id="hiddenChampionshipId" name="ChampionshipID">
+
         <h3>Create Tournament</h3>
         <label asp-for="ID">ID</label>
         <input asp-for="ID" name="ID" />
@@ -35,3 +37,14 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+<script>
+     (function () {
+        const select = document.getElementById("championShipSelect");
+         const hiddenInput = document.getElementById("hiddenChampionshipId");
+
+         if (select && hiddenInput) {
+             hiddenInput.value = select.value;
+             select.addEventListener("change", () => hiddenInput.value = select.value);
+         }
+     })();
+</script>
