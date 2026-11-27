@@ -1,24 +1,58 @@
-﻿@model e_sportsMVC.Models.ChampionShipModel
+﻿@using e_sportsMVC.Models
 
-<form asp-controller="Home" asp-action="CreateChampionShip" method="post">
-    <div>
-        <h3>Create ChampionShip</h3>
-        <label asp-for="ID">ID</label>
-        <input asp-for="ID" name="ID" />
-        <span asp-validation-for="ID" class="text-danger"></span>
-
-        <label asp-for="Name">Name</label>
-        <input asp-for="Name" name="Name" />
-        <span asp-validation-for="Name" class="text-danger">
-        </span>
-
-        <label asp-for="Year">Year</label>
-        <input asp-for="Year" name="Year" />
-        <span asp-validation-for="Year" class="text-danger"> </span>
-
-        <button type="submit" class="btn btn-success">Create</button>
-    </div>
-</form>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
 }
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Year</th>
+                <th style="width: 30px;">Tourments</th>
+                <th style="width: 50px;">Delete</th>
+                <th style="width: 30px;">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (DataBaseModel.ChampionShips != null && DataBaseModel.ChampionShips.Any())
+            {
+                @foreach (ChampionShipModel championship in DataBaseModel.ChampionShips)
+                {
+                    <tr>
+                        <td>@championship.ID</td>
+                        <td>@championship.Name</td>
+                        <td>@championship.Year</td>
+                        <td>
+                            <details>
+                                <summary>Tournaments(@championship.Tournaments.Count())</summary>
+                                <ul>
+                                    @if (championship.Tournaments != null)
+                                    {
+                                        @foreach (TournamentModel tournament in championship.Tournaments)
+                                        {
+                                            <li>@tournament.Name</li>
+                                        }
+                                    }
+                                </ul>
+                            </details>
+                        </td>
+                        <td style="width: 50px;">
+                            <form asp-action="DeleteChampionShip" method="post" onsubmit="return confirm('Eliminar?');">
+                                <input type="hidden" name="id" value="@championship.ID" />
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                        <td style="width: 30px;"><a asp-action="EditChampionShip" asp-route-id="@championship.ID" class="btn btn-primary btn-sm">Edit</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<partial name="_ChampionShips" model="new e_sportsMVC.Models.ChampionShipModel()"></partial>
