@@ -118,6 +118,177 @@ namespace e_sportsMVC.Controllers
         }
 
 
+        // ================= HELPERS (procuram em todos os campeonatos) =================
+
+        private static IEnumerable<TournamentModel> AllTournaments() =>
+            DataBaseModel.ChampionShips.SelectMany(c => c.Tournaments ?? new List<TournamentModel>());
+
+        private static IEnumerable<TeamModel> AllTeams() =>
+            AllTournaments().SelectMany(t => t.Teams ?? new List<TeamModel>());
+
+        // ================= CHAMPIONSHIPS: DELETE / EDIT =================
+
+        [HttpPost]
+        public IActionResult DeleteChampionShip(int id)
+        {
+            var item = DataBaseModel.ChampionShips.FirstOrDefault(c => c.ID == id);
+            if (item != null) DataBaseModel.ChampionShips.Remove(item);
+            return RedirectToAction("ChampionShips");
+        }
+
+        [HttpGet]
+        public IActionResult EditChampionShip(int id)
+        {
+            var item = DataBaseModel.ChampionShips.FirstOrDefault(c => c.ID == id);
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult EditChampionShip(int id, string name, string? year)
+        {
+            var item = DataBaseModel.ChampionShips.FirstOrDefault(c => c.ID == id);
+            if (item == null) return NotFound();
+            item.Name = name;
+            item.Year = year;
+            return RedirectToAction("ChampionShips");
+        }
+
+        // ================= TOURNAMENTS: DELETE / EDIT =================
+
+        [HttpPost]
+        public IActionResult DeleteTournament(int id)
+        {
+            foreach (var c in DataBaseModel.ChampionShips)
+            {
+                var item = c.Tournaments?.FirstOrDefault(t => t.ID == id);
+                if (item != null) { c.Tournaments!.Remove(item); break; }
+            }
+            return RedirectToAction("Tournaments");
+        }
+
+        [HttpGet]
+        public IActionResult EditTournament(int id)
+        {
+            var item = AllTournaments().FirstOrDefault(t => t.ID == id);
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult EditTournament(int id, int championShipId, string name, string game, TournamentModel.enumState state)
+        {
+            var item = AllTournaments().FirstOrDefault(t => t.ID == id);
+            if (item == null) return NotFound();
+            item.ChampionShipId = championShipId;
+            item.Name = name;
+            item.Game = game;
+            item.State = state;
+            return RedirectToAction("Tournaments");
+        }
+
+        // ================= TEAMS: DELETE / EDIT =================
+
+        [HttpPost]
+        public IActionResult DeleteTeam(int id)
+        {
+            foreach (var t in AllTournaments())
+            {
+                var item = t.Teams?.FirstOrDefault(x => x.ID == id);
+                if (item != null) { t.Teams!.Remove(item); break; }
+            }
+            return RedirectToAction("Teams");
+        }
+
+        [HttpGet]
+        public IActionResult EditTeam(int id)
+        {
+            var item = AllTeams().FirstOrDefault(t => t.ID == id);
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult EditTeam(int id, int captainId, string name, string country)
+        {
+            var item = AllTeams().FirstOrDefault(t => t.ID == id);
+            if (item == null) return NotFound();
+            item.CaptainId = captainId;
+            item.Name = name;
+            item.Country = country;
+            return RedirectToAction("Teams");
+        }
+
+        // ================= PLAYERS: DELETE / EDIT =================
+
+        [HttpPost]
+        public IActionResult DeletePlayer(int id)
+        {
+            foreach (var team in AllTeams())
+            {
+                var item = team.Players?.FirstOrDefault(p => p.ID == id);
+                if (item != null) { team.Players!.Remove(item); break; }
+            }
+            return RedirectToAction("Players");
+        }
+
+        [HttpGet]
+        public IActionResult EditPlayer(int id)
+        {
+            var item = AllTeams().SelectMany(t => t.Players ?? new List<PlayerModel>()).FirstOrDefault(p => p.ID == id);
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult EditPlayer(int id, int teamId, string name, string nickName, int age)
+        {
+            var item = AllTeams().SelectMany(t => t.Players ?? new List<PlayerModel>()).FirstOrDefault(p => p.ID == id);
+            if (item == null) return NotFound();
+            item.TeamID = teamId;
+            item.Name = name;
+            item.NickName = nickName;
+            item.Age = age;
+            return RedirectToAction("Players");
+        }
+
+        // ================= MATCHES: DELETE / EDIT =================
+
+        [HttpPost]
+        public IActionResult DeleteMatch(string id)
+        {
+            foreach (var t in AllTournaments())
+            {
+                var item = t.Matches?.FirstOrDefault(m => m.ID == id);
+                if (item != null) { t.Matches!.Remove(item); break; }
+            }
+            return RedirectToAction("Matches");
+        }
+
+        [HttpGet]
+        public IActionResult EditMatch(string id)
+        {
+            var item = AllTournaments().SelectMany(t => t.Matches ?? new List<MatchModel>()).FirstOrDefault(m => m.ID == id);
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult EditMatch(string id, string tournamentID, DateTime date, string teamAID, string teamBID, int resultA, int resultB, MatchModel.enumState state)
+        {
+            var item = AllTournaments().SelectMany(t => t.Matches ?? new List<MatchModel>()).FirstOrDefault(m => m.ID == id);
+            if (item == null) return NotFound();
+            item.TournamentID = tournamentID;
+            item.Date = date;
+            item.TeamAID = teamAID;
+            item.TeamBID = teamBID;
+            item.ResultA = resultA;
+            item.ResultB = resultB;
+            item.State = state;
+            return RedirectToAction("Matches");
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

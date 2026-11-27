@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-           @if (Model != null && Model.Any())
+            @if (Model != null && Model.Any())
             {
                 @foreach (PlayerModel player in Model)
                 {
@@ -39,19 +39,24 @@
                                 <ul>
                                     @foreach (int points in player.Points)
                                     {
-                                        <li>@points Points</li>    
+                                        <li>@points Points</li>
                                     }
                                 </ul>
                             </details>
                         </td>
-                        <td style="width: 50px;"><button class="btn btn-danger btn-sm">Delete</button></td>
-                        <td style="width: 30px;"><button class="btn btn-primary btn-sm">Edit</button></td>
+                        <td style="width: 50px;">
+                            <form asp-action="DeletePlayer" method="post" onsubmit="return confirm('Eliminar?');">
+                                <input type="hidden" name="id" value="@player.ID" />
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                        <td style="width: 30px;"><a asp-action="EditPlayer" asp-route-id="@player.ID" class="btn btn-primary btn-sm">Edit</a></td>
                     </tr>
                 }
             }
         </tbody>
     </table>
-    
+
 </div>
 
 <partial name="_Players" model="new e_sportsMVC.Models.PlayerModel()"></partial>
